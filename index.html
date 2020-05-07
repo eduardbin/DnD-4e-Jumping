@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DnD 4e Jumping</title>
+</head>
+
+<body>
+<h1>Прыжок</h1>
+<form action="#" name="rollForm" style="display: inline-block;">
+    <input type="number" placeholder="Введите рост в см" name="height" class="height">
+    <input type="number" placeholder="Введите бросок" name="roll" class="roll">
+    <br>
+    <br>
+    <label for="withRun">С разбегом</label>
+    <input type="checkbox" name="withRun" class="withRun" id="withRun">
+    <br>
+    <br>
+    <button class="btn">Результат</button>
+</form>
+<div>
+    <h2>Результат</h2>
+    <span class="result">???</span>
+</div>
+<script>
+    'use strict';
+
+    const btn = document.querySelector('.btn'),
+        result = document.querySelector('.result');
+
+    document.forms.rollForm.addEventListener('submit', jumpingUp);
+
+    function jumpingUp(event) {
+        event.preventDefault();
+
+        let characterHeight = +document.querySelector('.height').value;
+        const roll = +document.querySelector('.roll').value;
+        const withRun = document.querySelector('.withRun').checked;
+        let jump;
+
+        characterHeight /= 30.48;
+
+        if (withRun) {
+        	jump = roll / 5;
+		} else {
+        	jump = roll / 10;
+		};
+
+        const jumpDistance = Math.floor(jump / 5);
+
+        const gettingHeight = Math.floor((characterHeight + characterHeight / 3 + jump) / 5);
+
+        result.innerHTML = `Прыжок на ${jumpDistance} клеток. <br> Допрыгнул вверх на ${gettingHeight} клеток.`;
+    };
+</script>
+</body>
+
+</html>
